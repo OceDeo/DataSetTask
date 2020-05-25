@@ -1,8 +1,8 @@
 import os
 import csv
 import operator
+import datetime
 homeDir = os.environ['HOME'] 
-
 
 def bottom_five_rent(): # show 5 companies with the lowest rent 
     with open(homeDir + "/Desktop/Python/DataSetTask/dataset.csv", "r") as dataset:
@@ -22,4 +22,21 @@ def lease_year_25():
         print(lease_year_25_list)
         print(total_rent)
 
-lease_year_25()
+
+def masts_total_each():
+    tenant_list = []
+    with open(homeDir + "/Desktop/Python/DataSetTask/dataset.csv", "r") as dataset:
+        for line in csv.reader(dataset.readlines()[1:], delimiter=','):
+            tenant_name = line[6]
+            tenant_list.append(tenant_name)
+        tenant_dict = {key : tenant_list.count(key) for key in tenant_list}
+        print(tenant_dict)
+
+
+def main():
+    bottom_five_rent()
+    lease_year_25()
+    masts_total_each()
+
+if __name__ == "__main__":
+    main()
